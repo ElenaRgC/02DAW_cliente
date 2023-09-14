@@ -16,7 +16,7 @@ var edad3 = 20;
 
 var mayorEdad1 = false;
 var mayorEdad2 = false;
-var mayorEdad2 = false;
+var mayorEdad3 = false;
 
 function saludar(nombre, apellido1, apellido2) {
     console.log("Hola, " + nombre + " " + apellido1 + " " + apellido2);
@@ -59,11 +59,11 @@ saludar(nombre1, primerApellido1, segundoApellido1);
 saludar(nombre2, primerApellido2, segundoApellido2);
 saludar(nombre3, primerApellido3, segundoApellido3);
 
-esMayorEdad(edad1);
-esMayorEdad(edad2);
-esMayorEdad(edad3);
+esMayorEdad(edad1, mayorEdad1);
+esMayorEdad(edad2, mayorEdad2);
+esMayorEdad(edad3, mayorEdad3);
 
-console.log("La suma de edades es " + sumarEdad(edad1, edad2, edad3) + ".");
+console.log("La suma de edades es " + anosTotales + ".");
 
 finalizar(nombre1, primerApellido1, segundoApellido1, edad1);
 finalizar(nombre2, primerApellido2, segundoApellido2, edad2);
