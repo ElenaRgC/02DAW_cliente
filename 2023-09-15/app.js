@@ -1,10 +1,10 @@
-const persona = {
+20const persona = {
     dni: "01234567X",
     nombre: "Nombre",
     apellido: "Apellido",
     correo: "ejemplo@email.com",
     password: "admin123",
-    asignaturas: ["Cliente", "Servidor", "Interfaces", "Empresas", "Despliegue"]
+    /*asignaturas: ["Cliente", "Servidor", "Interfaces", "Empresas", "Despliegue"]*/
 };
 
 //admin123
