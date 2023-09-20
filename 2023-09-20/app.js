@@ -41,7 +41,7 @@ function validarEmail() {
     /*mínimo  @ pero ni en el primer caracter ni en los últimos 3*/
 }
 
-function validarLongitud(idCampo, minimo, maximo = 100000) {
+function validarLongitud(idCampo, minimo, maximo = 100) {
     let correcto = false;
     let texto = document.getElementByID(nombreCampo).value;
     let longitud = texto.length;
