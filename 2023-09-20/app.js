@@ -22,27 +22,35 @@ function login() {
 
 function validarLogin() {
     validarEmail();
-    validarPassword();
+    validarLongitud('password', 8);
 }
 
 function validarDatos() {
-    validarCampoTexto(nombre, 2, 30);
-    validarCampoTexto(apellido1, 3, 30);
-    validarCampoTexto(apellido2, 3, 30);
-    validarFechaNacimiento();
     validarDNI();
+    validarLongitud('nombre', 2, 30);
+    validarLongitud('apellido1', 3, 30);
+    validarLongitud('apellido2', 3, 30);
+    validarFechaNacimiento();
+}
+
+function mensajeError() {
+
 }
 
 function validarEmail() {
     /*mínimo  @ pero ni en el primer caracter ni en los últimos 3*/
 }
 
-function validarPassword() {
-    /*mínimo 8 caracteres*/
-}
+function validarLongitud(idCampo, minimo, maximo = 100000) {
+    let correcto = false;
+    let texto = document.getElementByID(nombreCampo).value;
+    let longitud = texto.length;
 
-function validarCampoTexto(campo, minimo, maximo) {
+    if (longitud >= minimo && longitud <= maximo) {
+        correcto = true;
+    }
 
+    return correcto;
 }
 
 function validarFechaNacimiento() {
