@@ -1,4 +1,4 @@
-20const persona = {
+const persona = {
     dni: "01234567X",
     nombre: "Nombre",
     apellido: "Apellido",
