@@ -9,22 +9,31 @@ const cuentas = [{
 },];
 
 function login() {
+    let correcto = false;
+    let validacion = validarLogin();
+
     let email = document.getElementById("email").value;
     let pass = document.getElementById("password").value;
 
     for (let i = 0; i < cuentas.length; i++) {
-        if (email === cuentas[i].correo && pass === cuentas[i].password) {
-            return true;
-        } else {
+        correcto = true;
+
+        if (email !== cuentas[i].correo || pass !== cuentas[i].password) {
             alert("Usuario o contraseña incorrectos.");
-            return false;
+            correcto = false;
         }
     }
+
+    return correcto && validacion;
 }
 
 function validarLogin() {
-    validarEmail();
-    validarLongitud('password', 8);
+    let correcto = false;
+    if (validarEmail() && validarLongitud('password', 8)) {
+        correcto = true;
+    }
+
+    return correcto;
 }
 
 // PÁGINA DATOS
@@ -37,8 +46,22 @@ function validarDatos() {
 
 }
 
-function mensajeError() {
+function mensajeError(codigos) {
+    let mensaje = "\n";
 
+    for (let i = 0; i < codigos.length; i++) {
+        switch (i) {
+            case 0: mensaje += "La contraseña debe tener un mínimo de 8 caracteres.\n";
+            break;
+            case 1: mensaje += "Debe haber un único @ en el email.\n";
+            break;
+            case 2: mensaje += "El arroba no puede estar al principio.\n";
+            break;
+            case 3: mensaje += "El arroba no puede estar en las tres últimas posiciones.\n";
+            break;
+            case 4: mensaje += ""
+        }
+    }
 }
 
 // FUNCIONES DE VALIDACIÓN
@@ -48,7 +71,8 @@ function validarEmail() {
     let email = document.getElementById("dni").value;
 
     if (email.includes('@')) {
-        if (email[0] != '@' || email[-1] != '@' || email[-2] != '@' || email[-3] != '@') {
+        if (email[0] !== '@' || email[email.length - 1] !== '@' ||
+            email[email.length - 2] !== '@' || email[email.length - 3] !== '@') {
             correcto = true;
         }
     }
@@ -82,30 +106,16 @@ function validarFechaNacimiento() {
 }
 
 function validarDNI() {
-    let letraDNI,
-        numeroDNI = "",
-        letras = "TRWAGMYFPDXBNJZSQVHLCKE",
-        resto = 0, correcto = false;
+    const dniUsuario = document.getElementById("dni").value;
+    const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-    let dniUsuario = document.getElementById("dni").value;
-
-    if (dniUsuario.length != 9) {
-        correcto = false;
-    } else {
-        letraDNI = dniUsuario[8];
-
-        for (i = 0; i < dniUsuario.length - 1; i++) {
-            numeroDNI = numeroDNI + dniUsuario[i];
-        }
-
-        resto = Number(numeroDNI) % 23;
-
-        if (letras[resto] != letraDNI) {
-            correcto = false;
-        } else {
-            correcto = true;
-        }
+    if (dniUsuario.length !== 9) {
+        return false;
     }
 
-    return correcto;
+    const numeroDNI = dniUsuario.slice(0, 8);
+    const letraDNI = dniUsuario[8];
+    const resto = Number(numeroDNI) % 23;
+
+    return letras[resto] === letraDNI;
 }
