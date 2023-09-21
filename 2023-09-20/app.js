@@ -39,6 +39,7 @@ function validarLogin() {
 // PÁGINA DATOS
 
 let errores = [];
+let campos = [];
 
 const mensajesDeError = {
     0: "Debes introducir un email.",
@@ -63,36 +64,11 @@ function validarDatos() {
 
 }
 
-function mensajeError(codigos, campos) {
+function imprimirError(codigos, campos) {
     let mensaje = "\n";
 
-    for (let i = 0; i < codigos.length; i++) {
-        switch (codigos[i]) {
-            case 0: mensaje += "El campo '" + campos[i] + "' está vacío.\n";
-            break;
-            case 1: mensaje += "No hay '@' en el campo '" + campos[i] + "'.\n";
-            break;
-            case 2: mensaje += "Hay más de un '@' en el campo '" + campos[i] + "'.\n";
-            break;
-            case 3: mensaje += "El '@' no está en la posición correcta en el campo '" + campos[i] + "'.\n";
-            break;
-            case 4: mensaje += "El campo '" + campos[i] + "' está vacío.\n";
-            break;
-            case 5: mensaje += "La longitud del campo '" + campos[i] + "' es distinta de 9.\n";
-            break;
-            case 6: mensaje += "Los caracteres en el campo '" + campos[i] + "' no son números.\n";
-            break;
-            case 7: mensaje += "La letra en el campo '" + campos[i] + "' no se corresponde al DNI.\n";
-            break;
-            case 8: mensaje += "El campo 'Fecha de Nacimiento' está vacío.\n";
-            break;
-            case 9: mensaje += "El formato de la fecha en el campo 'Fecha de Nacimiento' es incorrecto.\n";
-            break;
-            case 10: mensaje += "El campo '" + campos[i] + "' está vacío o no cumple con los caracteres mínimos y máximos permitidos.\n";
-            break;
-            case 11: mensaje += "La longitud del campo '" + campos[i] + "' es incorrecta.\n";
-            break;
-        }
+    for (let i = 0; i < errores.length; i++) {
+
     }
 
     alert(mensaje);
@@ -133,8 +109,10 @@ function validarLongitud(idCampo, minimo, maximo = 100) {
 
     if (longitud === 0) {
         errores.push(10); // Campo vacío
+        campos.push(idCampo);
         return false;
     } else if (longitud >= minimo && longitud <= maximo) {
+        campos.push(idCampo);
         return true;
     } else {
         errores.push(11); // Longitud incorrecta
