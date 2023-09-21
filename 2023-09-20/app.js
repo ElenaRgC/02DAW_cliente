@@ -38,6 +38,8 @@ function validarLogin() {
 
 // PÁGINA DATOS
 
+let errores = [];
+
 function validarDatos() {
     if (validarDNI() && validarLongitud('nombre', 2, 30) && validarLongitud('apellido1', 3, 30)
     && validarLongitud('apellido2', 3, 30) && validarFechaNacimiento()) {
@@ -62,22 +64,33 @@ function mensajeError(codigos) {
             case 4: mensaje += ""
         }
     }
+
+    alert(mensaje);
 }
 
 // FUNCIONES DE VALIDACIÓN
 
-function validarEmail() {
-    let correcto = false;
-    let email = document.getElementById("dni").value;
+function validarEmail(errores) {
+    const email = document.getElementById("email").value;
 
-    if (email.includes('@')) {
-        if (email[0] !== '@' || email[email.length - 1] !== '@' ||
-            email[email.length - 2] !== '@' || email[email.length - 3] !== '@') {
-            correcto = true;
+    if (!email.includes('@')) {
+        errores.push(1); // Código 1: No hay @
+        return false;
+    } else if (email.split('@').length > 2) {
+        errores.push(2); // Código 2: Más de un @
+        return false;
+    } else if (email[0] === '@'){
+        errores.push(3); // Código 3: @ no está en la posición correcta
+        return false;
+    } else {
+        for (let i = email.length; i >= email.length - 3; i--) {
+            if (email[i] === '@') {
+                errores.push(3); // Código 3: @ no está en la posición correcta
+                return false;
+            }
         }
     }
-
-    return correcto;
+    return true;
 }
 
 function validarLongitud(idCampo, minimo, maximo = 100) {
