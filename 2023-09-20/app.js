@@ -73,7 +73,11 @@ function mensajeError(codigos) {
 function validarEmail(errores) {
     const email = document.getElementById("email").value;
 
-    if (!email.includes('@')) {
+    if (email.length === 0) {
+        errores.push(0); // Está vacío
+        return false;
+    }
+    else if (!email.includes('@')) {
         errores.push(1); // No hay @
         return false;
     } else if (email.split('@').length > 2) {
@@ -97,10 +101,13 @@ function validarLongitud(idCampo, minimo, maximo = 100) {
     const texto = document.getElementById(idCampo).value;
     const longitud = texto.length;
 
-    if (longitud >= minimo && longitud <= maximo) {
+    if (longitud === 0) {
+        errores.push(10); // Campo vacío
+        return false;
+    } else if (longitud >= minimo && longitud <= maximo) {
         return true;
     } else {
-        errores.push(8); // Longitud incorrecta
+        errores.push(11); // Longitud incorrecta
         
         return false;
     }
@@ -109,10 +116,13 @@ function validarLongitud(idCampo, minimo, maximo = 100) {
 function validarFechaNacimiento() {
     const fecha = document.getElementById("fecha-nac").value;
 
-    if (fecha[2] === '/' && fecha[5] === '/') {
+    if (fecha.length === 0) {
+        errores.push(8); // Fecha vacía
+        return false;
+    } else if (fecha[2] === '/' && fecha[5] === '/') {
         return true;
     } else {
-        errores.push(8); // Formato incorrecto
+        errores.push(9); // Formato incorrecto
         return false;
     }
 
