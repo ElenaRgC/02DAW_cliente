@@ -1,3 +1,5 @@
+// PÁGINA LOGIN
+
 const cuentas = [{
     correo: "usuario1@email.com",
     password: "admin123",
@@ -25,6 +27,8 @@ function validarLogin() {
     validarLongitud('password', 8);
 }
 
+// PÁGINA DATOS
+
 function validarDatos() {
     validarDNI();
     validarLongitud('nombre', 2, 30);
@@ -37,8 +41,19 @@ function mensajeError() {
 
 }
 
+// FUNCIONES DE VALIDACIÓN
+
 function validarEmail() {
-    /*mínimo  @ pero ni en el primer caracter ni en los últimos 3*/
+    let correcto = false;
+    let email = document.getElementById("dni").value;
+
+    if (email.includes('@')) {
+        if (email[0] != '@' || email[-1] != '@' || email[-2] != '@' || email[-3] != '@') {
+            correcto = true;
+        }
+    }
+
+    return correcto;
 }
 
 function validarLongitud(idCampo, minimo, maximo = 100) {
@@ -54,7 +69,16 @@ function validarLongitud(idCampo, minimo, maximo = 100) {
 }
 
 function validarFechaNacimiento() {
-    /*dd/mm/AAAA*/
+    let correcto = false;
+    let fecha = document.getElementById("fecha-nac").value;
+
+    if (fecha[2] === '/' && fecha[5] === '/') {
+        correcto = true;
+    }
+
+    return correcto;
+
+    /* Habría que comprobar los días, meses y años bisiestos */
 }
 
 function validarDNI() {
