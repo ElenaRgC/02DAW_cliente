@@ -39,7 +39,6 @@ function validarLogin() {
 // PÁGINA DATOS
 
 let errores = [];
-let campos = [];
 
 const mensajesDeError = {
     0: "Debes introducir un email.",
@@ -64,12 +63,14 @@ function validarDatos() {
 
 }
 
-function imprimirError(codigos, campos) {
+function imprimirError(codigos) {
     let mensaje = "\n";
 
-    for (let i = 0; i < errores.length; i++) {
-
-    }
+    for (let i = 0; i < codigos.length; i++) {
+        const codigo = codigos[i];
+        if (mensajesDeError[codigo]) {
+            mensaje += mensajesDeError[codigo];
+        }
 
     alert(mensaje);
 }
@@ -109,10 +110,8 @@ function validarLongitud(idCampo, minimo, maximo = 100) {
 
     if (longitud === 0) {
         errores.push(10); // Campo vacío
-        campos.push(idCampo);
         return false;
     } else if (longitud >= minimo && longitud <= maximo) {
-        campos.push(idCampo);
         return true;
     } else {
         errores.push(11); // Longitud incorrecta
