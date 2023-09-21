@@ -40,6 +40,21 @@ function validarLogin() {
 
 let errores = [];
 
+const mensajesDeError = {
+    0: "Debes introducir un email.",
+    1: "El email debe tener un @.",
+    2: "No puede haber más de un @ en el email..",
+    3: "El @ no puede estar en la primera o tres últimas posiciones del email.",
+    4: "Debes introducir un DNI.",
+    5: "Introduce 9 caracteres en el DNI.",
+    6: "El DNI no está compuesto de 8 números y una letra.",
+    7: "La letra no se corresponde al DNI.",
+    8: "Debes introducir tu fecha de nadimiento.",
+    9: "El formato de la fecha de nacimiento es dd/mm/AAAA.",
+    10: "El campo no puede estar vacío.",
+    11: "El campo debe estar entre X e Y caracteres."
+};
+
 function validarDatos() {
     if (validarDNI() && validarLongitud('nombre', 2, 30) && validarLongitud('apellido1', 3, 30)
     && validarLongitud('apellido2', 3, 30) && validarFechaNacimiento()) {
@@ -48,20 +63,35 @@ function validarDatos() {
 
 }
 
-function mensajeError(codigos) {
+function mensajeError(codigos, campos) {
     let mensaje = "\n";
 
     for (let i = 0; i < codigos.length; i++) {
-        switch (i) {
-            case 0: mensaje += "La contraseña debe tener un mínimo de 8 caracteres.\n";
+        switch (codigos[i]) {
+            case 0: mensaje += "El campo '" + campos[i] + "' está vacío.\n";
             break;
-            case 1: mensaje += "Debe haber un único @ en el email.\n";
+            case 1: mensaje += "No hay '@' en el campo '" + campos[i] + "'.\n";
             break;
-            case 2: mensaje += "El arroba no puede estar al principio.\n";
+            case 2: mensaje += "Hay más de un '@' en el campo '" + campos[i] + "'.\n";
             break;
-            case 3: mensaje += "El arroba no puede estar en las tres últimas posiciones.\n";
+            case 3: mensaje += "El '@' no está en la posición correcta en el campo '" + campos[i] + "'.\n";
             break;
-            case 4: mensaje += ""
+            case 4: mensaje += "El campo '" + campos[i] + "' está vacío.\n";
+            break;
+            case 5: mensaje += "La longitud del campo '" + campos[i] + "' es distinta de 9.\n";
+            break;
+            case 6: mensaje += "Los caracteres en el campo '" + campos[i] + "' no son números.\n";
+            break;
+            case 7: mensaje += "La letra en el campo '" + campos[i] + "' no se corresponde al DNI.\n";
+            break;
+            case 8: mensaje += "El campo 'Fecha de Nacimiento' está vacío.\n";
+            break;
+            case 9: mensaje += "El formato de la fecha en el campo 'Fecha de Nacimiento' es incorrecto.\n";
+            break;
+            case 10: mensaje += "El campo '" + campos[i] + "' está vacío o no cumple con los caracteres mínimos y máximos permitidos.\n";
+            break;
+            case 11: mensaje += "La longitud del campo '" + campos[i] + "' es incorrecta.\n";
+            break;
         }
     }
 
