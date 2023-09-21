@@ -74,18 +74,18 @@ function validarEmail(errores) {
     const email = document.getElementById("email").value;
 
     if (!email.includes('@')) {
-        errores.push(1); // Código 1: No hay @
+        errores.push(1); // No hay @
         return false;
     } else if (email.split('@').length > 2) {
-        errores.push(2); // Código 2: Más de un @
+        errores.push(2); // Más de un @
         return false;
     } else if (email[0] === '@'){
-        errores.push(3); // Código 3: @ no está en la posición correcta
+        errores.push(3); // @ no está en la posición correcta
         return false;
     } else {
         for (let i = email.length; i >= email.length - 3; i--) {
             if (email[i] === '@') {
-                errores.push(3); // Código 3: @ no está en la posición correcta
+                errores.push(3); // @ no está en la posición correcta
                 return false;
             }
         }
@@ -94,15 +94,16 @@ function validarEmail(errores) {
 }
 
 function validarLongitud(idCampo, minimo, maximo = 100) {
-    let correcto = false;
-    let texto = document.getElementById(idCampo).value;
-    let longitud = texto.length;
+    const texto = document.getElementById(idCampo).value;
+    const longitud = texto.length;
 
     if (longitud >= minimo && longitud <= maximo) {
-        correcto = true;
+        return true;
+    } else {
+        errores.push(8); // Longitud incorrecta
+        
+        return false;
     }
-
-    return correcto;
 }
 
 function validarFechaNacimiento() {
