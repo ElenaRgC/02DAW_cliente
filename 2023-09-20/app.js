@@ -118,17 +118,35 @@ function validarFechaNacimiento() {
     /* Habría que comprobar los días, meses y años bisiestos */
 }
 
-function validarDNI() {
+function validarDNI(errores) {
     const dniUsuario = document.getElementById("dni").value;
     const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
 
+    if (dniUsuario === "") {
+        errores.push(4); // DNI vacío
+        return false;
+    }
+
     if (dniUsuario.length !== 9) {
+        errores.push(5); // Longitud es distinta de 9
         return false;
     }
 
     const numeroDNI = dniUsuario.slice(0, 8);
     const letraDNI = dniUsuario[8];
+
+    if (Number.isInteger(numeroDNI)) {
+        errores.push(6); // Los números no son números
+        return false;
+    }
+
     const resto = Number(numeroDNI) % 23;
 
-    return letras[resto] === letraDNI;
+    if (letras[resto] !== letraDNI) {
+        errores.push(7); // Código 7: La letra no se corresponde al DNI
+        return false;
+    }
+
+    return true;
 }
+
