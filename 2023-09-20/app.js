@@ -106,14 +106,14 @@ function validarLongitud(idCampo, minimo, maximo = 100) {
 }
 
 function validarFechaNacimiento() {
-    let correcto = false;
-    let fecha = document.getElementById("fecha-nac").value;
+    const fecha = document.getElementById("fecha-nac").value;
 
     if (fecha[2] === '/' && fecha[5] === '/') {
-        correcto = true;
+        return true;
+    } else {
+        errores.push(8); // Formato incorrecto
+        return false;
     }
-
-    return correcto;
 
     /* Habría que comprobar los días, meses y años bisiestos */
 }
@@ -135,7 +135,7 @@ function validarDNI(errores) {
     const numeroDNI = dniUsuario.slice(0, 8);
     const letraDNI = dniUsuario[8];
 
-    if (Number.isInteger(numeroDNI)) {
+    if (!Number.isInteger(numeroDNI)) {
         errores.push(6); // Los números no son números
         return false;
     }
