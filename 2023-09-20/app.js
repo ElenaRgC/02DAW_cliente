@@ -30,11 +30,11 @@ function validarLogin() {
 // PÁGINA DATOS
 
 function validarDatos() {
-    validarDNI();
-    validarLongitud('nombre', 2, 30);
-    validarLongitud('apellido1', 3, 30);
-    validarLongitud('apellido2', 3, 30);
-    validarFechaNacimiento();
+    if (validarDNI() && validarLongitud('nombre', 2, 30) && validarLongitud('apellido1', 3, 30)
+    && validarLongitud('apellido2', 3, 30) && validarFechaNacimiento()) {
+        alert('Datos correctos.')
+    }
+
 }
 
 function mensajeError() {
@@ -58,7 +58,7 @@ function validarEmail() {
 
 function validarLongitud(idCampo, minimo, maximo = 100) {
     let correcto = false;
-    let texto = document.getElementByID(nombreCampo).value;
+    let texto = document.getElementById(idCampo).value;
     let longitud = texto.length;
 
     if (longitud >= minimo && longitud <= maximo) {
