@@ -27,13 +27,20 @@ function login() {
     return correcto && validacion;
 }
 
-function validarLogin() {
-    let correcto = false;
-    if (validarEmail() && validarLongitud('password', 8)) {
-        correcto = true;
-    }
+function validarDatos() {
+    errores = []; // Reinicia el arreglo de errores antes de la validación.
 
-    return correcto;
+    if (
+        validarDNI() &&
+        validarLongitud('nombre', 2, 30) &&
+        validarLongitud('apellido1', 3, 30) &&
+        validarLongitud('apellido2', 3, 30) &&
+        validarFechaNacimiento()
+        ) {
+        alert('Datos correctos.');
+    } else {
+        imprimirError(errores);
+    }
 }
 
 // PÁGINA DATOS
