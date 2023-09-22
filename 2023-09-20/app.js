@@ -30,8 +30,7 @@ function login() {
 }
 
 function validarDatos() {
-    errores = []; // Reinicia el arreglo de errores antes de la validación.
-
+    errores = [];
     if (
         validarDNI() &&
         validarLongitud('nombre', 2, 30) &&
@@ -163,7 +162,7 @@ function imprimirError(codigos) {
     const resto = Number(numeroDNI) % 23;
 
     if (letras[resto] !== letraDNI) {
-        errores.push(7); // Código 7: La letra no se corresponde al DNI
+        errores.push(7); // La letra no se corresponde al DNI
         return false;
     }
 
