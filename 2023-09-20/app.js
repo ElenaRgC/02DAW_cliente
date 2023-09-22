@@ -1,3 +1,23 @@
+/*
+    No es perfecto ni lo que pides, y no funciona todo lo bien que me gustaría.
+    Por un lado porque creía que agrupar todos los mensajes de error sería buena idea,
+    pero luego me he dado cuenta de que debería estar separado según si era la página de login o la de datos.
+
+    Por otro lado, debería haber hecho tres funciones de validar longitud en vez de una sola, para que
+    los mensajes de error fueran personalizados. Hubo un momento en el que me había heco un objeto con id, longMin
+    y longMax para hacer los mensajes de errores paramétricos pero se me fue de las manos y perdí mucho tiempo.
+
+    Y a última hora he descubierto que había un } de más que hacía que las últimas funciones estuvieran dentro de otra
+    y eran la razón por las que algunas validaciones no me saltaban, aunque les di mil vueltas. Me he dado cuenta
+    porque me parecía que estaban demasiado tabuladas.
+
+    Pero estoy contenta, he practicado muchas cosas diferentes y he recordado otras cosas.
+    Creo que con objetos esto sería mucho más conciso, claro y eficiente (y espero que fácil).
+*/
+
+
+
+
 // PÁGINA LOGIN
 
 const cuentas = [{
