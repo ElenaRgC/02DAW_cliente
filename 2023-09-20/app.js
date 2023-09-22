@@ -58,7 +58,9 @@ const mensajesDeError = {
 function validarDatos() {
     if (validarDNI() && validarLongitud('nombre', 2, 30) && validarLongitud('apellido1', 3, 30)
     && validarLongitud('apellido2', 3, 30) && validarFechaNacimiento()) {
-        alert('Datos correctos.')
+        alert('Datos correctos.');
+    } else {
+        imprimirError(errores);
     }
 
 }
@@ -72,18 +74,18 @@ function imprimirError(codigos) {
             mensaje += mensajesDeError[codigo];
         }
 
-    alert(mensaje);
-}
-
-// FUNCIONES DE VALIDACIÓN
-
-function validarEmail(errores) {
-    const email = document.getElementById("email").value;
-
-    if (email.length === 0) {
-        errores.push(0); // Está vacío
-        return false;
+        alert(mensaje);
     }
+
+    // FUNCIONES DE VALIDACIÓN
+
+    function validarEmail() {
+        const email = document.getElementById("email").value;
+
+        if (email.length === 0) {
+            errores.push(0); // Está vacío
+            return false;
+        }
     else if (!email.includes('@')) {
         errores.push(1); // No hay @
         return false;
@@ -102,48 +104,48 @@ function validarEmail(errores) {
         }
     }
     return true;
-}
-
-function validarLongitud(idCampo, minimo, maximo = 100) {
-    const texto = document.getElementById(idCampo).value;
-    const longitud = texto.length;
-
-    if (longitud === 0) {
-        errores.push(10); // Campo vacío
-        return false;
-    } else if (longitud >= minimo && longitud <= maximo) {
-        return true;
-    } else {
-        errores.push(11); // Longitud incorrecta
-        
-        return false;
     }
-}
 
-function validarFechaNacimiento() {
-    const fecha = document.getElementById("fecha-nac").value;
+    function validarLongitud(idCampo, minimo, maximo = 100) {
+        const texto = document.getElementById(idCampo).value;
+        const longitud = texto.length;
 
-    if (fecha.length === 0) {
-        errores.push(8); // Fecha vacía
-        return false;
-    } else if (fecha[2] === '/' && fecha[5] === '/') {
-        return true;
-    } else {
-        errores.push(9); // Formato incorrecto
-        return false;
+        if (longitud === 0) {
+            errores.push(10); // Campo vacío
+            return false;
+        } else if (longitud >= minimo && longitud <= maximo) {
+            return true;
+        } else {
+            errores.push(11); // Longitud incorrecta
+
+            return false;
+        }
     }
+
+    function validarFechaNacimiento() {
+        const fecha = document.getElementById("fecha-nac").value;
+
+        if (fecha.length === 0) {
+            errores.push(8); // Fecha vacía
+            return false;
+        } else if (fecha[2] === '/' && fecha[5] === '/') {
+            return true;
+        } else {
+            errores.push(9); // Formato incorrecto
+            return false;
+        }
 
     /* Habría que comprobar los días, meses y años bisiestos */
-}
-
-function validarDNI(errores) {
-    const dniUsuario = document.getElementById("dni").value;
-    const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-
-    if (dniUsuario === "") {
-        errores.push(4); // DNI vacío
-        return false;
     }
+
+    function validarDNI(errores) {
+        const dniUsuario = document.getElementById("dni").value;
+        const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+        if (dniUsuario === "") {
+            errores.push(4); // DNI vacío
+            return false;
+        }
 
     if (dniUsuario.length !== 9) {
         errores.push(5); // Longitud es distinta de 9
@@ -166,5 +168,6 @@ function validarDNI(errores) {
     }
 
     return true;
+    }
 }
 
