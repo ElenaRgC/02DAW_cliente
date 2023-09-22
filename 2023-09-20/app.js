@@ -9,23 +9,25 @@ const cuentas = [{
 },];
 
 function login() {
-    let correcto = false;
-    let validacion = validarLogin();
-
     let email = document.getElementById("email").value;
     let pass = document.getElementById("password").value;
 
-    for (let i = 0; i < cuentas.length; i++) {
-        correcto = true;
+    if (!validarLongitud('password', 8)) {
+        alert("La contraseña debe tener al menos 8 caracteres.");
+        return false;
+    }
 
-        if (email !== cuentas[i].correo || pass !== cuentas[i].password) {
-            alert("Usuario o contraseña incorrectos.");
-            correcto = false;
+    for (let i = 0; i < cuentas.length; i++) {
+        if (email === cuentas[i].correo && pass === cuentas[i].password) {
+            return true;
         }
     }
 
-    return correcto && validacion;
+    alert("Usuario o contraseña incorrectos.");
+    return false; 
 }
+
+
 
 function validarDatos() {
     errores = []; // Reinicia el arreglo de errores antes de la validación.
