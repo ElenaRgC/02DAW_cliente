@@ -12,6 +12,8 @@ class Banco {
     sacarDinero = function(cantidad) {
         if (this.saldo > cantidad) {
             this.saldo -= cantidad;
+        } else {
+            console.log("Saldo insuficiente.")
         }
     }
     
@@ -20,3 +22,16 @@ class Banco {
     }
     
 }
+
+let b = new Banco("Elena", 200);
+
+b.comprobarSaldo();
+
+b.ingresarDinero(100);
+b.comprobarSaldo();
+
+b.sacarDinero(200);
+b.comprobarSaldo();
+
+b.sacarDinero(300);
+b.comprobarSaldo();
