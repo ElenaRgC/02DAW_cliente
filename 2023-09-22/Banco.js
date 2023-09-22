@@ -35,3 +35,8 @@ b.comprobarSaldo();
 
 b.sacarDinero(300);
 b.comprobarSaldo();
+
+/* Clase Alumno, Clase Tutor, Clase Asignatura */
+/* Alumno: nombre, asignaturas, notamedia() */
+/* Tutor: Nombre, dni */
+/* Asignaturas: nombre, nota */
