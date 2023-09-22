@@ -12,22 +12,22 @@ function login() {
     let email = document.getElementById("email").value;
     let pass = document.getElementById("password").value;
 
-    if (!validarLongitud('password', 8)) {
+    if (email.trim() === "" || pass.trim() === "") {
+        alert("Debes ingresar un usuario y una contraseña.");
+    } else if (!validarLongitud('password', 8)) {
         alert("La contraseña debe tener al menos 8 caracteres.");
-        return false;
-    }
-
-    for (let i = 0; i < cuentas.length; i++) {
-        if (email === cuentas[i].correo && pass === cuentas[i].password) {
-            return true;
+    } else if (!validarEmail()) {
+            imprimirError(errores);
+    } else {
+        for (let i = 0; i < cuentas.length; i++) {
+            if (email === cuentas[i].correo && pass === cuentas[i].password) {
+                window.location.href = "datos.html";
+                return;
+            }
         }
+        alert("Usuario o contraseña incorrectos.");
     }
-
-    alert("Usuario o contraseña incorrectos.");
-    return false; 
 }
-
-
 
 function validarDatos() {
     errores = []; // Reinicia el arreglo de errores antes de la validación.
@@ -64,16 +64,6 @@ const mensajesDeError = {
     11: "El campo debe estar entre X e Y caracteres."
 };
 
-function validarDatos() {
-    if (validarDNI() && validarLongitud('nombre', 2, 30) && validarLongitud('apellido1', 3, 30)
-    && validarLongitud('apellido2', 3, 30) && validarFechaNacimiento()) {
-        alert('Datos correctos.');
-    } else {
-        imprimirError(errores);
-    }
-
-}
-
 function imprimirError(codigos) {
     let mensaje = "\n";
 
@@ -85,6 +75,7 @@ function imprimirError(codigos) {
 
         alert(mensaje);
     }
+}
 
     // FUNCIONES DE VALIDACIÓN
 
@@ -120,12 +111,12 @@ function imprimirError(codigos) {
         const longitud = texto.length;
 
         if (longitud === 0) {
-            errores.push(10); // Campo vacío
+            errores.push(10);
             return false;
         } else if (longitud >= minimo && longitud <= maximo) {
             return true;
         } else {
-            errores.push(11); // Longitud incorrecta
+            errores.push(11);
 
             return false;
         }
@@ -177,7 +168,6 @@ function imprimirError(codigos) {
     }
 
     return true;
-    }
 }
 
 function limpiar() {
