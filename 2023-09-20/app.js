@@ -171,3 +171,13 @@ function imprimirError(codigos) {
     }
 }
 
+function limpiar() {
+    document.getElementById("dni").value = "";
+    document.getElementById("nombre").value = "";
+    document.getElementById("apellido1").value = "";
+    document.getElementById("apellido2").value = "";
+    document.getElementById("fecha-nac").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+}
+
