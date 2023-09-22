@@ -57,10 +57,10 @@ const mensajesDeError = {
     5: "Introduce 9 caracteres en el DNI.",
     6: "El DNI no está compuesto de 8 números y una letra.",
     7: "La letra no se corresponde al DNI.",
-    8: "Debes introducir tu fecha de nadimiento.",
+    8: "Debes introducir tu fecha de nacimiento.",
     9: "El formato de la fecha de nacimiento es dd/mm/AAAA.",
-    10: "El campo no puede estar vacío.",
-    11: "El campo debe estar entre X e Y caracteres."
+    10: "Ningún campo puede estar vacío.",
+    11: "El campo debe estar entre 3 y 8 caracteres."
 };
 
 function imprimirError(codigos) {
@@ -137,7 +137,7 @@ function imprimirError(codigos) {
     /* Habría que comprobar los días, meses y años bisiestos */
     }
 
-    function validarDNI(errores) {
+    function validarDNI() {
         const dniUsuario = document.getElementById("dni").value;
         const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
 
@@ -151,7 +151,7 @@ function imprimirError(codigos) {
         return false;
     }
 
-    const numeroDNI = dniUsuario.slice(0, 8);
+        const numeroDNI = +dniUsuario.slice(0, 8);
     const letraDNI = dniUsuario[8];
 
     if (!Number.isInteger(numeroDNI)) {
