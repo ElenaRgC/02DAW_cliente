@@ -71,7 +71,7 @@ function imprimirError(codigos) {
     for (let i = 0; i < codigos.length; i++) {
         const codigo = codigos[i];
         if (mensajesDeError[codigo]) {
-            mensaje += mensajesDeError[codigo];
+            mensaje += mensajesDeError[codigo] + "\n";
         }
 
         alert(mensaje);
