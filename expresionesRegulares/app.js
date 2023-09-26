@@ -1,4 +1,4 @@
-let re = /ab+c/
+/*let re = /ab+c/
 let reg = new RegExp("ab+c");
 console.log(re)
 console.log(reg)
@@ -19,5 +19,12 @@ let cadena = /^[A-Za-z0-9_]+$/
 console.log(cadena.exec('$manzana'))
 
 let binario = /^[0-1]{8}[A-Z]{2}$/
-console.log(binario.exec('01010110AA'))
- 
+console.log(binario.exec('01010110AA'))*/
+
+let patronMatricula = /^[0-9]{4}[B-DF-HJ-NPR-TV-Z]{3}$/;
+let matricula = "1071FXT";
+
+console.log(patronMatricula.test(matricula));
+
+console.log(patronMatricula.test("9999A"));
+console.log(patronMatricula.test("9FFF"));
