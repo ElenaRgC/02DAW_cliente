@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Datos personales</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<h1>Datos</h1>
+
+<form action="" method="POST">
+    <label for="dni">DNI:</label>
+    <input type="text" name="dni" id="dni">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" id="nombre">
+
+    <label for="apellido1">Primer apellido:</label>
+    <input type="text" name="apellido1" id="apellido1">
+
+    <label for="apellido2">Segundo apellido:</label>
+    <input type="text" name="apellido2" id="apellido2">
+
+    <label for="fecha-nac">Fecha de nacimiento:</label>
+    <input type="text" name="fecha-nac" id="fecha-nac">
+
+    <div>
+        <input type="button" value="Limpiar" onclick="limpiar()">
+        <input type="button" value="Guardar" onclick="validarDatos();">
+    </div>
+</form>
+
+<script src="app.js"></script>
+</body>
+
+</html>
