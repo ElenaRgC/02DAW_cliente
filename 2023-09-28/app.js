@@ -35,7 +35,7 @@ function validar(elemento) {
 	let nombre = elemento.getAttribute('name');
 	let patron = patrones[nombre];
 
-	if (patron.test(elemento)) {
+	if (patron.test(elemento.value)) {
 		quitarError(elemento);
 	} else {
 		mostrarError(elemento);
@@ -52,9 +52,12 @@ function guardar() {
 }
 
 function mostrarError(elemento) {
+	elemento.classList.remove('correcto');
 	elemento.classList.add('error');
+	mensaje.innerText = "El número de su " + elemento.getAttribute('name') + " es incorrecto."
 }
 
 function quitarError(elemento) {
 	elemento.classList.remove('error');
+	elemento.classList.add('correcto');
 }
