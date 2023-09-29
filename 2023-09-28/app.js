@@ -18,26 +18,37 @@ Cuando se cambien el número de tarjeta automáticamente si el CVV esta relleno 
 */
 
 let mensaje = document.getElementById('mensaje');
-let iban = document.getElementById('iban').value;
-let cuenta = document.getElementById('cuenta').value;
-let tarjeta = document.getElementById('tarjeta').value;
-let cvv = document.getElementById('cvv').value;
 
-var patrones = {
+function recogerElementos() {
+
+	elementos['iban'] = document.getElementById('iban').value,
+	elementos['cuenta'] = document.getElementById('cuenta').value,
+	elementos['tarjeta'] = document.getElementById('tarjeta').value,
+	elementos['cvv'] = document.getElementById('cvv').value
+}
+
+let elementos = {
+	iban: document.getElementById('iban').value,
+	cuenta: document.getElementById('cuenta').value,
+	tarjeta: document.getElementById('tarjeta').value,
+	cvv: document.getElementById('cvv').value,
+}
+
+let patrones = {
 	iban: /^ES7[68]$/,
 	cuenta: /^\d{20}$/,
 	tarjeta: /^\d{16}$/,
 	cvv: /^\d{3}$/,
 }
 
-var validaciones = {
+let validaciones = {
 	iban: false,
 	cuenta: false,
 	tarjeta: false,
 	cvv: false,
 }
 
-var datos = {
+let datos = {
 	iban: "",
 	cuenta: "",
 	tarjeta: "",
@@ -45,6 +56,7 @@ var datos = {
 };
 
 function guardar() {
+	recogerElementos()
 	let guardar = true;
 
 	for (let elemento in validaciones) {
@@ -52,8 +64,6 @@ function guardar() {
 			guardar = false;
 		}
 	}
-
-	console.log(validaciones);
 
 	if (guardar) {
 		datos.iban = iban.value;
@@ -71,10 +81,10 @@ function validar(elemento) {
 	let patron = patrones[nombre];
 
 	if (patron.test(elemento.value)) {
-		validaciones[elemento] = true;
+		validaciones[nombre] = true;
 		quitarError(elemento);
 	} else {
-		validaciones[elemento] = false;
+		validaciones[nombre] = false;
 		mostrarError(elemento);
 	}
 	return patron.test(elemento);
