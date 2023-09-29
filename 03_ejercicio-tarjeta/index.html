@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Validador tarjetas</title>
+</head>
+<body>
+<main>
+    <div class="w3-container">
+        <div class="w3-row-padding">
+            <label for="iban">IBAN:</label>
+            <input type="text" name="iban" id="iban" style="width:6ch">
+            <input type="text" name="cuenta" id="cuenta">
+        </div>
+        <div class="w3-row-padding">
+            <label for="tarjeta">Número de tarjeta:</label>
+            <input type="text" name="tarjeta" id="tarjeta">
+        </div>
+        <div class="w3-row-padding">
+            <label for="cvv">CVV:</label>
+            <input type="text" name="cvv" id="cvv" style="width:6ch">
+        </div>
+
+        <button id="boton">Guardar</button>
+    </div>
+
+    <p id="mensaje"><br></p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

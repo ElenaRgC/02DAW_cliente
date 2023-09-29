@@ -1,0 +1,29 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+button {
+    float: right;
+}
+
+main > div {
+    width: 480px;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+
+.error {
+    border: solid red 2px;
+}
+
+.correcto {
+    border: solid green 2px;
+}
