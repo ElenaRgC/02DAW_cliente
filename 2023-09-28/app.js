@@ -1,37 +1,16 @@
 /*
-Crear una pantalla html con los siguientes campos:
-
-IBAN. Compuesto de dos campos: Uno con 4 caracteres y otro con 20
-Tarjeta.
-	Número tarjeta: 16 dígitos
-	CVV: 3 dígitos
- Tener un botón de Guardar con los siguentes requisitos:
-	Se comprobará que los primeros campos del IBAN sean 4 caracteres y solo se admitirán dos valores válidos:
-        ES76 y ES78 si no es ningun de ellos se coloreará de color rojo y se mostrá un mensaje en
-	    en la parte inferior de que IBAN inválido
-	Se comprobará que el número de cuenta es correcto de longitud
-	Se comprobará de que el número de tarjeta tiene la longitud correcta y que solo contiene número si falla se mostrará el texto de que es incorrecto
-	Se comprobará que el CVV tiene la longitud correcta y que sean solo números.
-
 Otros requisitos:
 Cuando se cambien el número de tarjeta automáticamente si el CVV esta relleno se limpiará el campo.
 */
 
 let mensaje = document.getElementById('mensaje');
-
-function recogerElementos() {
-
-	elementos['iban'] = document.getElementById('iban').value,
-	elementos['cuenta'] = document.getElementById('cuenta').value,
-	elementos['tarjeta'] = document.getElementById('tarjeta').value,
-	elementos['cvv'] = document.getElementById('cvv').value
-}
+let boton = document.getElementById('boton');
 
 let elementos = {
-	iban: document.getElementById('iban').value,
-	cuenta: document.getElementById('cuenta').value,
-	tarjeta: document.getElementById('tarjeta').value,
-	cvv: document.getElementById('cvv').value,
+	iban: "",
+	cuenta: "",
+	tarjeta: "",
+	cvv: "",
 }
 
 let patrones = {
@@ -55,29 +34,54 @@ let datos = {
 	cvv: ""
 };
 
-function guardar() {
-	recogerElementos()
-	let guardar = true;
+recogerElementos();
+crearListeners();
 
-	for (let elemento in validaciones) {
-		if (!validaciones[elemento]) {
-			guardar = false;
-		}
-	}
-
-	if (guardar) {
-		datos.iban = iban.value;
-		datos.cuenta = cuenta.value;
-		datos.tarjeta = tarjeta.value;
-		datos.cvv = cvv.value;
-
-		console.log(datos);
-		mensaje.value = "Transacción completada."
+function crearListeners() {
+	for (let input in elementos) {
+		elementos[input].addEventListener('change', function() {
+			validar(this);
+		});
 	}
 }
 
+boton.addEventListener('click', function(){
+	guardar();
+});
+
+elementos['tarjeta'].addEventListener('change', function(){
+	elementos['cvv'].value = "";
+	elementos['cvv'].classList.remove('error');
+	elementos['cvv'].classList.remove('correcto');
+});
+
+function guardar() {
+	recogerElementos();
+	let guardar = true;
+
+	for (let input in validaciones) {
+		if (!validaciones[input]) {
+			guardar = false;
+			mostrarError(elementos[input])
+			mensaje.innerText = "No se pudo completar la transacción.";
+		}
+	}
+
+
+	if (guardar) {
+		datos.iban = elementos['iban'].value;
+		datos.cuenta = elementos['cuenta'].value;
+		datos.tarjeta = elementos['tarjeta'].value;
+		datos.cvv = elementos['cvv'].value;
+
+		console.log(datos);
+		mensaje.innerText = "Transacción completada.";
+	}
+}
+
+
 function validar(elemento) {
-	let nombre = elemento.getAttribute('name');
+let nombre = elemento.getAttribute('name');
 	let patron = patrones[nombre];
 
 	if (patron.test(elemento.value)) {
@@ -90,14 +94,22 @@ function validar(elemento) {
 	return patron.test(elemento);
 }
 
+
 function mostrarError(elemento) {
 	elemento.classList.remove('correcto');
 	elemento.classList.add('error');
-	mensaje.innerText = "El número de su " + elemento.getAttribute('name') + " es incorrecto."
+	mensaje.innerText = "El número de su " + elemento.getAttribute('name') + " es incorrecto.";
 }
 
 function quitarError(elemento) {
 	elemento.classList.remove('error');
 	elemento.classList.add('correcto');
-	mensaje.innerText = "El número de su " + elemento.getAttribute('name') + " es correcto."
+	mensaje.innerText = "El número de su " + elemento.getAttribute('name') + " es correcto.";
+}
+
+function recogerElementos() {
+	elementos['iban'] = document.getElementById('iban');
+	elementos['cuenta'] = document.getElementById('cuenta');
+	elementos['tarjeta'] = document.getElementById('tarjeta');
+	elementos['cvv'] = document.getElementById('cvv');
 }
