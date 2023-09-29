@@ -5,20 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-
 <form>
-    <label for="iban">IBAN:</label>
-    <input type="text" name="iban" id="iban">
-    <input type="text" name="" id="">
+    <div class="iban">
+        <label for="iban">IBAN:</label>
+        <input type="text" name="iban" id="iban" onblur="validarIban()">
+        <input type="text" name="cuenta" id="cuenta" onblur="validarCuenta()">
+    </div>
+    <div class="tarjeta">
+        <label for="tarjeta">Número de tarjeta:</label>
+        <input type="text" name="num-tarjeta" id="tarjeta" onblur="validarTarjeta()">
+    </div>
+    <div class="cvv">
+        <label for="cvv">CVV:</label>
+        <input type="text" name="cvv" id="cvv" onblur="validarCvv()">
+    </div>
 
-    <label for="num-tarjeta">Número de tarjeta:</label>
-    <input type="text" name="num-tarjeta" id="num-tarjeta">
-    <label for="cvv">CVV:</label>
-    <input type="text" name="cvv" id="cvv">
-    <input type="button" value="Guardar">
+    <input type="button" value="Guardar" id="boton" onclick="guardar();">
 </form>
 
 <p id="mensaje"></p>
