@@ -30,25 +30,54 @@ var patrones = {
 	cvv: /^\d{3}$/,
 }
 
-function validar(elemento) {
+var validaciones = {
+	iban: false,
+	cuenta: false,
+	tarjeta: false,
+	cvv: false,
+}
 
+var datos = {
+	iban: "",
+	cuenta: "",
+	tarjeta: "",
+	cvv: ""
+};
+
+function guardar() {
+	let guardar = true;
+
+	for (let elemento in validaciones) {
+		if (!validaciones[elemento]) {
+			guardar = false;
+		}
+	}
+
+	console.log(validaciones);
+
+	if (guardar) {
+		datos.iban = iban.value;
+		datos.cuenta = cuenta.value;
+		datos.tarjeta = tarjeta.value;
+		datos.cvv = cvv.value;
+
+		console.log(datos);
+		mensaje.value = "Transacción completada."
+	}
+}
+
+function validar(elemento) {
 	let nombre = elemento.getAttribute('name');
 	let patron = patrones[nombre];
 
 	if (patron.test(elemento.value)) {
+		validaciones[elemento] = true;
 		quitarError(elemento);
 	} else {
+		validaciones[elemento] = false;
 		mostrarError(elemento);
 	}
 	return patron.test(elemento);
-}
-
-function guardar() {
-	let correcto = false;
-
-	if (correcto) {
-		mensaje.value = "Transacción completada."
-	}
 }
 
 function mostrarError(elemento) {
@@ -60,4 +89,5 @@ function mostrarError(elemento) {
 function quitarError(elemento) {
 	elemento.classList.remove('error');
 	elemento.classList.add('correcto');
+	mensaje.innerText = "El número de su " + elemento.getAttribute('name') + " es correcto."
 }
