@@ -17,36 +17,110 @@ Otros requisitos:
 Cuando se cambien el número de tarjeta automáticamente si el CVV esta relleno se limpiará el campo.
 */
 
-function guardar() {
-	if (validarIban() && validarCuenta() && validarTarjeta() && validarCvv()) {
+let mensaje = document.getElementById('mensaje');
+let iban = document.getElementById('iban').value;
+let cuenta = document.getElementById('cuenta').value;
+let tarjeta = document.getElementById('tarjeta').value;
+let cvv = document.getElementById('cvv').value;
 
+
+function guardar() {
+	let correcto = false;
+
+	if (validarIban()) {
+		iban.className= '';
+		correcto = true;
+	} else {
+		iban.className= 'error';
+		mensaje.value = "IBAN incorrecto."
+		correcto = false;
+	}
+
+	if (validarCuenta()) {
+		cuenta.className= '';
+		correcto = true;
+	} else {
+		cuenta.className= 'error';
+		mensaje.value = "Número de cuenta incorrecto."
+		correcto = false;
+	}
+
+	if (validarTarjeta()) {
+		tarjeta.className= '';
+		correcto = true;
+	} else {
+		tarjeta.className= 'error';
+		mensaje.value = "Número de tarjeta incorrecto."
+		correcto = false;
+	}
+
+	if (validarCvv()) {
+		tarjeta.className= '';
+		correcto = true;
+	} else {
+		tarjeta.className= 'error';
+		mensaje.value = "Número CVV incorrecto."
+		correcto = false;
+	}
+
+	if (correcto) {
+		mensaje.value = "Transacción completada."
 	}
 }
 
 function validarIban() {
-	let iban = document.getElementById('iban').value;
+
 	let patron = /^ES7[68]$/;
+
+	if (patron.test(iban)) {
+		quitarError(iban);
+	} else {
+		mostrarError(iban);
+	}
 
 	return patron.test(iban);
 }
 
 function validarCuenta() {
-	let cuenta = document.getElementById('cuenta').value;
 	let patron = /^\d{20}$/;
+
+	if (patron.test(cuenta)) {
+		quitarError(cuenta);
+	} else {
+		mostrarError(cuenta);
+	}
 
 	return patron.test(cuenta);
 }
 
 function validarTarjeta() {
-	let tarjeta = document.getElementById('tarjeta').value;
 	let patron = /^\d{16}$/;
+
+	if (patron.test(tarjeta)) {
+		quitarError(tarjeta);
+	} else {
+		mostrarError(tarjeta);
+	}
 
 	return patron.test(tarjeta);
 }
 
 function validarCvv() {
-	let cvv = document.getElementById('cvv').value;
 	let patron = /^\d{3}$/;
 
+	if (patron.test(cvv)) {
+		quitarError(cvv);
+	} else {
+		mostrarError(cvv);
+	}
+
 	return patron.test(cvv);
+}
+
+function mostrarError(elemento) {
+	elemento.className = 'error';
+}
+
+function quitarError(elemento) {
+	elemento.className = '';
 }
