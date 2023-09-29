@@ -23,104 +23,38 @@ let cuenta = document.getElementById('cuenta').value;
 let tarjeta = document.getElementById('tarjeta').value;
 let cvv = document.getElementById('cvv').value;
 
+var patrones = {
+	iban: /^ES7[68]$/,
+	cuenta: /^\d{20}$/,
+	tarjeta: /^\d{16}$/,
+	cvv: /^\d{3}$/,
+}
+
+function validar(elemento) {
+
+	let nombre = elemento.getAttribute('name');
+	let patron = patrones[nombre];
+
+	if (patron.test(elemento)) {
+		quitarError(elemento);
+	} else {
+		mostrarError(elemento);
+	}
+	return patron.test(elemento);
+}
 
 function guardar() {
 	let correcto = false;
-
-	if (validarIban()) {
-		iban.className= '';
-		correcto = true;
-	} else {
-		iban.className= 'error';
-		mensaje.value = "IBAN incorrecto."
-		correcto = false;
-	}
-
-	if (validarCuenta()) {
-		cuenta.className= '';
-		correcto = true;
-	} else {
-		cuenta.className= 'error';
-		mensaje.value = "Número de cuenta incorrecto."
-		correcto = false;
-	}
-
-	if (validarTarjeta()) {
-		tarjeta.className= '';
-		correcto = true;
-	} else {
-		tarjeta.className= 'error';
-		mensaje.value = "Número de tarjeta incorrecto."
-		correcto = false;
-	}
-
-	if (validarCvv()) {
-		tarjeta.className= '';
-		correcto = true;
-	} else {
-		tarjeta.className= 'error';
-		mensaje.value = "Número CVV incorrecto."
-		correcto = false;
-	}
 
 	if (correcto) {
 		mensaje.value = "Transacción completada."
 	}
 }
 
-function validarIban() {
-
-	let patron = /^ES7[68]$/;
-
-	if (patron.test(iban)) {
-		quitarError(iban);
-	} else {
-		mostrarError(iban);
-	}
-
-	return patron.test(iban);
-}
-
-function validarCuenta() {
-	let patron = /^\d{20}$/;
-
-	if (patron.test(cuenta)) {
-		quitarError(cuenta);
-	} else {
-		mostrarError(cuenta);
-	}
-
-	return patron.test(cuenta);
-}
-
-function validarTarjeta() {
-	let patron = /^\d{16}$/;
-
-	if (patron.test(tarjeta)) {
-		quitarError(tarjeta);
-	} else {
-		mostrarError(tarjeta);
-	}
-
-	return patron.test(tarjeta);
-}
-
-function validarCvv() {
-	let patron = /^\d{3}$/;
-
-	if (patron.test(cvv)) {
-		quitarError(cvv);
-	} else {
-		mostrarError(cvv);
-	}
-
-	return patron.test(cvv);
-}
-
 function mostrarError(elemento) {
-	elemento.className = 'error';
+	elemento.classList.add('error');
 }
 
 function quitarError(elemento) {
-	elemento.className = '';
+	elemento.classList.remove('error');
 }
